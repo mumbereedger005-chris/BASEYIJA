@@ -12,7 +12,7 @@ if (closeMenu)  closeMenu.addEventListener('click',  () => mobileMenu.classList.
 
 function closeMobile() { mobileMenu.classList.remove('open'); }
 
-/* ---------- Loan Calculator ---------- */
+/* ---------- Loan Calculator ---------- 
 function fmt(n) {
   return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -43,7 +43,7 @@ function calcUpdate() {
 }
 
 // Initialise on load
-window.addEventListener('DOMContentLoaded', calcUpdate);
+window.addEventListener('DOMContentLoaded', calcUpdate); */
 
 /* ---------- Eligibility Checker ---------- */
 function checkEligibility(e) {
@@ -57,7 +57,7 @@ function checkEligibility(e) {
   let pass = true;
   let reasons = [];
 
-  if (age < 18 || age > 70)           { pass = false; reasons.push('Age must be between 18 and 70.'); }
+  if (age < 20 || age > 70)           { pass = false; reasons.push('Age must be between 20 and 70.'); }
   if (income < 800)                   { pass = false; reasons.push('Minimum monthly income required is $800.'); }
   if (employment === 'Unemployed')    { pass = false; reasons.push('Applicants must be currently employed or self-employed.'); }
   if (loanAmt > income * 36)          { pass = false; reasons.push('Requested amount exceeds the maximum based on your income.'); }
