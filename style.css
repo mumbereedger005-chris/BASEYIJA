@@ -1,5 +1,5 @@
 /* ===================================================
-   SwiftLend – Main Stylesheet
+   Julius Quick Loans – Main Stylesheet
    =================================================== */
 
 /* ---------- CSS Variables ---------- */
@@ -173,7 +173,7 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 /* ===================================================
    LOAN CALCULATOR
-   =================================================== */
+   =================================================== 
 .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
 .calc-form { display: flex; flex-direction: column; gap: 28px; }
 .calc-form .form-group label { display: flex; justify-content: space-between; }
@@ -196,6 +196,7 @@ input[type="range"]::-webkit-slider-thumb {
 .result-item span { font-size: .9rem; color: var(--text-muted); }
 .result-item strong { font-weight: 700; font-size: 1.1rem; }
 .calc-disclaimer { font-size: .8rem; color: var(--text-muted); }
+ =================================================== */
 
 /* ===================================================
    ELIGIBILITY
