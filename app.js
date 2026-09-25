@@ -58,7 +58,7 @@ function checkEligibility(e) {
   let reasons = [];
 
   if (age < 20 || age > 70)           { pass = false; reasons.push('Age must be between 20 and 70.'); }
-  if (income < 800)                   { pass = false; reasons.push('Minimum monthly income required is $800.'); }
+  if (income < 150000)                { pass = false; reasons.push('Minimum monthly income required is UGX 150,000.'); }
   if (employment === 'Unemployed')    { pass = false; reasons.push('Applicants must be currently employed or self-employed.'); }
   if (loanAmt > income * 36)          { pass = false; reasons.push('Requested amount exceeds the maximum based on your income.'); }
 
@@ -136,9 +136,9 @@ function buildReview() {
     ['Email',             document.getElementById('email').value || '—'],
     ['Phone',             document.getElementById('phone').value || '—'],
     ['Employment',        document.getElementById('employment').value || '—'],
-    ['Monthly Income',    document.getElementById('income').value ? '$' + parseFloat(document.getElementById('income').value).toLocaleString() : '—'],
+    ['Monthly Income',    document.getElementById('income').value ? 'UGX ' + parseFloat(document.getElementById('income').value).toLocaleString() : '—'],
     ['Loan Type',         document.getElementById('loanType').value || '—'],
-    ['Loan Amount',       document.getElementById('loanAmount').value ? '$' + parseFloat(document.getElementById('loanAmount').value).toLocaleString() : '—'],
+    ['Loan Amount',       document.getElementById('loanAmount').value ? 'UGX ' + parseFloat(document.getElementById('loanAmount').value).toLocaleString() : '—'],
     ['Repayment Period',  document.getElementById('loanTerm').value || '—'],
     ['Purpose',           document.getElementById('loanPurpose').value || '—'],
   ];
@@ -159,18 +159,59 @@ document.getElementById('loanApplicationForm').addEventListener('submit', functi
     return;
   }
 
-  // Simulate submission
-  this.style.display = 'none';
+  // Collect all form data
+  const ref = 'JQL-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 90000) + 10000);
+
+  const params = {
+    ref_number:    ref,
+    full_name:     document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+    dob:           document.getElementById('dob').value,
+    gender:        document.getElementById('gender').value,
+    email:         document.getElementById('email').value,
+    phone:         document.getElementById('phone').value,
+    address:       document.getElementById('address').value,
+    employment:    document.getElementById('employment').value,
+    monthly_income:'UGX ' + parseFloat(document.getElementById('income').value || 0).toLocaleString(),
+    loan_type:     document.getElementById('loanType').value,
+    loan_amount:   'UGX ' + parseFloat(document.getElementById('loanAmount').value || 0).toLocaleString(),
+    loan_term:     document.getElementById('loanTerm').value,
+    loan_purpose:  document.getElementById('loanPurpose').value,
+    notes:         document.getElementById('loanNotes').value || 'None',
+    submitted_at:  new Date().toLocaleString(),
+  };
+
+  const submitBtn = this.querySelector('[type="submit"]');
+  if (!window.emailJsReady || !window.emailjs ||
+      ['YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID'].some(id => id.startsWith('YOUR_'))) {
+    showToast('Online applications are not configured yet. Please contact our team.', 'error');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+  // Send via EmailJS
+  // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' from your EmailJS dashboard
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+    .then(() => {
+      showApplicationSuccess(ref);
+    })
+    .catch((err) => {
+      console.warn('EmailJS submission failed:', err);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+      showToast('Your application was not sent. Please try again later.', 'error');
+    });
+});
+
+function showApplicationSuccess(ref) {
+  document.getElementById('loanApplicationForm').style.display = 'none';
   document.getElementById('stepIndicator').style.display = 'none';
   const successMsg = document.getElementById('successMsg');
   successMsg.style.display = 'block';
-
-  // Generate a reference number
-  const ref = 'SL-2026-' + String(Math.floor(Math.random() * 90000) + 10000);
   document.getElementById('refNumber').textContent = ref;
-
   successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
+}
 
 /* ---------- Camera / ID Scan ---------- */
 let cameraStream = null;
@@ -311,8 +352,7 @@ function toggleFaq(btn) {
 /* ---------- Contact form ---------- */
 function submitContact(e) {
   e.preventDefault();
-  e.target.style.display = 'none';
-  document.getElementById('contactSuccess').style.display = 'flex';
+  showToast('This contact form is not connected yet. Please email juliusquickcash@gmail.com.', 'error');
 }
 
 /* ---------- Live chat ---------- */

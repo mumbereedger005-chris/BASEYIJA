@@ -3,10 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Julius Quik Loans – Loans You Can Trust</title>
+  <title>Julius Quik Cash Finance – Loans You Can Trust</title>
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- EmailJS – sends form submissions to your email inbox -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // Replace 'YOUR_PUBLIC_KEY' with the key from your EmailJS dashboard.
+    window.emailJsReady = false;
+    (function () {
+      const publicKey = 'YOUR_PUBLIC_KEY';
+      if (window.emailjs && publicKey !== 'YOUR_PUBLIC_KEY') {
+        window.emailjs.init({ publicKey });
+        window.emailJsReady = true;
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -14,12 +27,12 @@
   <header class="navbar" id="top">
     <div class="container nav-inner">
       <a href="#top" class="logo">
-        <i class="fa-solid fa-landmark"></i> Julius Quik Loans
+        
+        <span>Julius Quik Cash Finance</span>
       </a>
       <nav>
         <ul class="nav-links">
           <li><a href="#loans">Loans</a></li>
-          <!--<li><a href="#calculator">Calculator</a></li>--->
           <li><a href="#eligibility">Eligibility</a></li>
           <li><a href="#apply">Apply</a></li>
           <li><a href="#account">My Account</a></li>
@@ -40,7 +53,6 @@
     </button>
     <ul>
       <li><a href="#loans" onclick="closeMobile()">Loans</a></li>
-      <!--<li><a href="#calculator" onclick="closeMobile()">Calculator</a></li>-->
       <li><a href="#eligibility" onclick="closeMobile()">Eligibility</a></li>
       <li><a href="#apply" onclick="closeMobile()">Apply</a></li>
       <li><a href="#account" onclick="closeMobile()">My Account</a></li>
@@ -59,7 +71,7 @@
         <a href="#loans" class="btn btn-outline">View Loan Options</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><strong>10,000+</strong><span>Customers Served</span></div>
+        <div class="stat"><strong>15,000+</strong><span>Customers Served</span></div>
         <div class="stat"><strong>98%</strong><span>Approval Satisfaction</span></div>
         <div class="stat"><strong>24 hrs</strong><span>Average Payout</span></div>
       </div>
@@ -87,22 +99,20 @@
       <div class="cards-grid">
 
         <div class="card loan-card">
-         
           <h3>Personal Loan</h3>
           <ul class="loan-details">
-            <li><i class="fa-solid fa-check"></i> Amount: Ugsh.250000 – Ugsh.500,000</li>
+            <li><i class="fa-solid fa-check"></i> Amount: UGX 250,000 – UGX 500,000</li>
             <li><i class="fa-solid fa-check"></i> Term: 2 – 4 months</li>
-            <li><i class="fa-solid fa-check"></i> Interest: from 2.9% p.a.</li>
+            <li><i class="fa-solid fa-check"></i> Interest: from 2.9% p.m.</li>
             <li><i class="fa-solid fa-check"></i> No collateral required</li>
           </ul>
           <a href="#apply" class="btn btn-primary full-width">Apply</a>
         </div>
 
-        <div class="card loan-card featured">
-          
+        <div class="card loan-card">
           <h3>Business Loan</h3>
           <ul class="loan-details">
-            <li><i class="fa-solid fa-check"></i> Amount:Ugsh.500,000 – Ugsh.1,500,000</li>
+            <li><i class="fa-solid fa-check"></i> Amount: UGX 500,000 – UGX 1,500,000</li>
             <li><i class="fa-solid fa-check"></i> Term: 4 – 8 months</li>
             <li><i class="fa-solid fa-check"></i> Interest: from 6.5% p.a.</li>
             <li><i class="fa-solid fa-check"></i> Flexible repayment</li>
@@ -111,11 +121,10 @@
         </div>
 
         <div class="card loan-card">
-
           <h3>Home Loan</h3>
           <ul class="loan-details">
-            <li><i class="fa-solid fa-check"></i> Amount: Ugsh.1,500,000 – Ugsh.6,000,000</li>
-            <li><i class="fa-solid fa-check"></i> Term: 5 – 12months</li>
+            <li><i class="fa-solid fa-check"></i> Amount: UGX 1,500,000 – UGX 6,000,000</li>
+            <li><i class="fa-solid fa-check"></i> Term: 5 – 12 months</li>
             <li><i class="fa-solid fa-check"></i> Interest: from 4.5% p.a.</li>
             <li><i class="fa-solid fa-check"></i> Fixed &amp; variable rates</li>
           </ul>
@@ -123,10 +132,9 @@
         </div>
 
         <div class="card loan-card">
-        
           <h3>Education Loan</h3>
           <ul class="loan-details">
-            <li><i class="fa-solid fa-check"></i> Amount: Ugsh.6,000,000 – Ugsh.15,000,000</li>
+            <li><i class="fa-solid fa-check"></i> Amount: UGX 6,000,000 – UGX 15,000,000</li>
             <li><i class="fa-solid fa-check"></i> Term: 12 – 24 months</li>
             <li><i class="fa-solid fa-check"></i> Interest: from 5.9% p.a.</li>
             <li><i class="fa-solid fa-check"></i> Deferred repayment option</li>
@@ -138,54 +146,7 @@
     </div>
   </section>
 
-  <!-- ===== LOAN CALCULATOR ===== -->
-  <!---<section class="section bg-light" id="calculator">
-    <div class="container">
-      <div class="section-head">
-        <h2>Loan Calculator</h2>
-        <p>Estimate your monthly repayment and total interest before you apply. No commitment required.</p>
-      </div>
-      <div class="calc-wrapper">
-        <div class="calc-form">
-
-          <div class="form-group">
-            <label for="calcAmount">Loan Amount (Ugsh)</label>
-            <input type="range" id="calcAmount" min="500" max="500000" step="500" value="10000" oninput="calcUpdate()" />
-            <div class="range-value">$<span id="amountDisplay">10,000</span></div>
-          </div>
-
-          <div class="form-group">
-            <label for="calcTerm">Repayment Period (months)</label>
-            <input type="range" id="calcTerm" min="6" max="360" step="6" value="24" oninput="calcUpdate()" />
-            <div class="range-value"><span id="termDisplay">24</span> months</div>
-          </div>
-
-          <div class="form-group">
-            <label for="calcRate">Annual Interest Rate (%)</label>
-            <input type="range" id="calcRate" min="3" max="30" step="0.1" value="9" oninput="calcUpdate()" />
-            <div class="range-value"><span id="rateDisplay">9.0</span>%</div>
-          </div>
-
-        </div>
-        <div class="calc-result">
-          <div class="result-item highlight">
-            <span>Monthly Repayment</span>
-            <strong id="monthlyResult">Ugsh.456.85</strong>
-          </div>
-          <div class="result-item">
-            <span>Total Repayment</span>
-            <strong id="totalResult">Ugsh.10,964.40</strong>
-          </div>
-          <div class="result-item">
-            <span>Total Interest</span>
-            <strong id="interestResult">Ugsh.964.40</strong>
-          </div>
-          <p class="calc-disclaimer">This is an estimate only. Actual repayments may vary based on your credit profile.</p>
-          <a href="#apply" class="btn btn-primary full-width">Apply for This Loan</a>
-        </div>
-      </div>
-    </div>
-  </section>--->
+ 
 
   <!-- ===== ELIGIBILITY CHECKER ===== -->
   <section class="section" id="eligibility">
@@ -198,11 +159,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="eAge">Age</label>
-            <input type="number" id="eAge" placeholder="e.g. 22" min="20" max="70" required />
+            <input type="number" id="eAge" placeholder="e.g. 28" min="20" max="70" required />
           </div>
           <div class="form-group">
-            <label for="eIncome">Monthly Income (Ugsh)</label>
-            <input type="number" id="eIncome" placeholder="e.g. 350000" min="0" required />
+            <label for="eIncome">Monthly Income (UgX)</label>
+            <input type="number" id="eIncome" placeholder="e.g. 3000" min="0" required />
           </div>
         </div>
         <div class="form-row">
@@ -230,10 +191,32 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="eLoanAmount">Desired Loan Amount (Ugsh)</label>
-          <input type="number" id="eLoanAmount" placeholder="e.g. 15000" min="2500" required />
+          <label for="eLoanAmount">Desired Loan Amount (UGX)</label>
+          <select id="eLoanAmount" required>
+            <option value="">Select amount range...</option>
+            <optgroup label="Personal Loan (UGX 250,000 – 500,000)">
+              <option value="250000">UGX 250,000</option>
+              <option value="350000">UGX 350,000</option>
+              <option value="500000">UGX 500,000</option>
+            </optgroup>
+            <optgroup label="Business Loan (UGX 500,000 – 1,500,000)">
+              <option value="750000">UGX 750,000</option>
+              <option value="1000000">UGX 1,000,000</option>
+              <option value="1500000">UGX 1,500,000</option>
+            </optgroup>
+            <optgroup label="Home Loan (UGX 1,500,000 – 6,000,000)">
+              <option value="2000000">UGX 2,000,000</option>
+              <option value="4000000">UGX 4,000,000</option>
+              <option value="6000000">UGX 6,000,000</option>
+            </optgroup>
+            <optgroup label="Education Loan (UGX 6,000,000 – 15,000,000)">
+              <option value="8000000">UGX 8,000,000</option>
+              <option value="12000000">UGX 12,000,000</option>
+              <option value="15000000">UGX 15,000,000</option>
+            </optgroup>
+          </select>
         </div>
-        <button type="submit" class="btn btn-primary full-width">Check If Your Eligible</button>
+        <button type="submit" class="btn btn-primary full-width">Check If Your Eligibility</button>
       </form>
       <div class="eligibility-result" id="eligibilityResult" style="display:none;"></div>
     </div>
@@ -276,10 +259,8 @@
               <input type="date" id="dob" required />
             </div>
             <div class="form-group">
-              <label for="gender">Gender *</label>
-             
-              <select  type="gender" id="gender" required>
-               <!---- <option value="">Prefer not to say</option>-->
+              <label for="gender">Gender*</label>
+              <select id="gender" required>
                 <option>Male</option>
                 <option>Female</option>
                 <option>Other</option>
@@ -289,16 +270,16 @@
           <div class="form-row">
             <div class="form-group">
               <label for="email">Email Address *</label>
-              <input type="email" id="email" placeholder="edgerlibo004@gmail.com" required />
+              <input type="email" id="email" placeholder="edgerlibo002@gmail.com" required />
             </div>
             <div class="form-group">
               <label for="phone">Phone Number *</label>
-              <input type="tel" id="phone" placeholder="+256 75 166 0387" required />
+              <input type="tel" id="phone" placeholder="+256 77 809 1146" required />
             </div>
           </div>
           <div class="form-group">
             <label for="address">Residential Address *</label>
-            <input type="text" id="address" placeholder="vilage,parish,subcounty,district e.g Kampala, ZIP" required />
+            <input type="text" id="address" placeholder="123 Main Street, City, District e.g Kasese, ZIP" required />
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -313,8 +294,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="income">Monthly Income (Ugsh) *</label>
-              <input type="number" id="income" placeholder="e.g. 130000" required />
+              <label for="income">Monthly Income (UgX) *</label>
+              <input type="number" id="income" placeholder="e.g. 3500000" required />
             </div>
           </div>
           <div class="step-btns">
@@ -335,10 +316,36 @@
                 <option>Home Loan</option>
                 <option>Education Loan</option>
               </select>
-            </div>
             <div class="form-group">
-              <label for="loanAmount">Loan Amount (Ugsh) *</label>
-              <input type="number" id="loanAmount" placeholder="e.g. 250000" required />
+              <label for="loanAmount">Loan Amount (UGX) *</label>
+              <select id="loanAmount" required>
+                <option value="">Select amount range...</option>
+                <optgroup label="Personal Loan">
+                  <option value="250000">UGX 250,000</option>
+                  <option value="350000">UGX 350,000</option>
+                  <option value="500000">UGX 500,000</option>
+                </optgroup>
+                <optgroup label="Business Loan">
+                  <option value="500000">UGX 500,000</option>
+                  <option value="750000">UGX 750,000</option>
+                  <option value="1000000">UGX 1,000,000</option>
+                  <option value="1500000">UGX 1,500,000</option>
+                </optgroup>
+                <optgroup label="Home Loan">
+                  <option value="1500000">UGX 1,500,000</option>
+                  <option value="2000000">UGX 2,000,000</option>
+                  <option value="3000000">UGX 3,000,000</option>
+                  <option value="4000000">UGX 4,000,000</option>
+                  <option value="6000000">UGX 6,000,000</option>
+                </optgroup>
+                <optgroup label="Education Loan">
+                  <option value="6000000">UGX 6,000,000</option>
+                  <option value="8000000">UGX 8,000,000</option>
+                  <option value="10000000">UGX 10,000,000</option>
+                  <option value="12000000">UGX 12,000,000</option>
+                  <option value="15000000">UGX 15,000,000</option>
+                </optgroup>
+              </select>
             </div>
           </div>
           <div class="form-row">
@@ -348,11 +355,13 @@
                 <option value="">Select...</option>
                 <option>2 months</option>
                 <option>4 months</option>
-                <option>5 months</option>
-                <option>8 months</option>
+                <option>6 months</option>
                 <option>12 months</option>
                 <option>24 months</option>
-                <!--<option>84 months</option>
+             <!----  <option>36 months</option>
+                <option>48 months</option>
+                <option>60 months</option>
+                <option>84 months</option>
                 <option>120 months</option>-->
               </select>
             </div>
@@ -462,7 +471,7 @@
                 <label for="proofIncome">
                   <i class="fa-solid fa-money-bill-wave"></i>
                   <span>Proof of Income</span>
-                  <small>Pay slip, bank statement (last 2 months)</small>
+                  <small>Pay slip, bank statement (last 3 months)</small>
                 </label>
                 <input type="file" id="proofIncome" accept="image/*,.pdf" onchange="showFileName(this,'incomeFileName')" />
                 <p class="file-name" id="incomeFileName">No file chosen</p>
@@ -480,7 +489,7 @@
                 <label for="bankStatement">
                   <i class="fa-solid fa-building-columns"></i>
                   <span>Bank Statements</span>
-                  <small>Last 2–6 months of statements</small>
+                  <small>Last 3–6 months of statements</small>
                 </label>
                 <input type="file" id="bankStatement" accept="image/*,.pdf" multiple onchange="showFileName(this,'bankFileName')" />
                 <p class="file-name" id="bankFileName">No file chosen</p>
@@ -510,7 +519,7 @@
             </label>
             <label class="checkbox-label">
               <input type="checkbox" id="consentAccurate" required />
-              I confirm that all information provided is accurate,complete and is mine.
+              I confirm that all information provided is accurate and complete.
             </label>
           </div>
 
@@ -581,11 +590,11 @@
           <h3><i class="fa-solid fa-right-to-bracket"></i> Log In</h3>
           <div class="form-group">
             <label for="loginEmail">Email Address</label>
-            <input type="email" id="loginEmail" placeholder="you@email.com" />
+            <input type="email" id="loginEmail" placeholder="youremail@gmail.com" />
           </div>
           <div class="form-group">
             <label for="loginPass">Password</label>
-            <input type="password" id="loginPass" placeholder="********" />
+            <input type="password" id="loginPass" placeholder="*********" />
           </div>
           <button class="btn btn-primary full-width" onclick="simulateLogin()">Log In</button>
           <p class="small-link"><a href="#">Forgot password?</a> &nbsp;|&nbsp; <a href="#apply">Register / Apply</a></p>
@@ -594,13 +603,13 @@
         <!-- Dashboard (shown after login simulation) -->
         <div class="account-dashboard hidden" id="accountDashboard">
           <div class="dash-welcome">
-            <h3>Welcome back, <span id="dashName">Edger Libo</span></h3>
+            <h3>Welcome back, <span id="dashName">Masereka Julius</span></h3>
             <button class="btn btn-outline small" onclick="logout()">Log Out</button>
           </div>
           <div class="dash-cards">
             <div class="dash-card blue">
               <i class="fa-solid fa-sack-dollar"></i>
-              <div><span>Outstanding Balance</span><strong>Ugsh.8,45000</strong></div>
+              <div><span>Outstanding Balance</span><strong>UGX 8,470,000</strong></div>
             </div>
             <div class="dash-card green">
               <i class="fa-solid fa-calendar-check"></i>
@@ -622,10 +631,10 @@
                 <tr><th>#</th><th>Due Date</th><th>Amount</th><th>Status</th></tr>
               </thead>
               <tbody>
-                <tr><td>14</td><td>Sep 1, 2026</td><td>Ugsh.38500</td><td><span class="badge-status paid">Paid</span></td></tr>
-                <tr><td>15</td><td>Oct 1, 2026</td><td>Ugsh.384000</td><td><span class="badge-status due">Due</span></td></tr>
-                <tr><td>16</td><td>Nov 1, 2026</td><td>Ugsh.85000</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
-                <tr><td>17</td><td>Dec 1, 2026</td><td>Ugsh.385000</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
+                <tr><td>14</td><td>Sep 1, 2026</td><td>UGX 385,000</td><td><span class="badge-status paid">Paid</span></td></tr>
+                <tr><td>15</td><td>Oct 1, 2026</td><td>UGX 385,000</td><td><span class="badge-status due">Due</span></td></tr>
+                <tr><td>16</td><td>Nov 1, 2026</td><td>UGX 385,000</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
+                <tr><td>17</td><td>Dec 1, 2026</td><td>UGX 385,000</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -647,12 +656,12 @@
         <p>Convenient ways to manage and pay your loan.</p>
       </div>
       <div class="repay-grid">
-        <div class="repay-item"><i class="fa-solid fa-rotate"></i><h4>Auto-Debit</h4><p>Set up automatic monthly deductions from your bank account. Never miss a payment.</p></div>
-        <div class="repay-item"><i class="fa-solid fa-mobile-screen-button"></i><h4>Mobile / Online Pay</h4><p>Pay securely via our website or mobile app anytime.</p></div>
-        <div class="repay-item"><i class="fa-solid fa-building-columns"></i><h4>Bank Transfer</h4><p>Transfer directly to our account using your reference number.</p></div>
-        <div class="repay-item"><i class="fa-solid fa-forward-fast"></i><h4>Early Repayment</h4><p>Pay off your loan early with no penalty. Contact us to get your settlement figure.</p></div>
-        <div class="repay-item"><i class="fa-solid fa-calendar-days"></i><h4>Payment Holiday</h4><p>Eligible customers can request a temporary payment pause. Terms apply.</p></div>
-        <div class="repay-item"><i class="fa-solid fa-handshake-angle"></i><h4>Hardship Support</h4><p>Facing financial difficulty? Our team can discuss rescheduling or other options.</p></div>
+        <div class="repay-item"></i><h4>Auto-Debit</h4><p>Set up automatic monthly deductions from your bank account. Never miss a payment.</p></div>
+        <div class="repay-item"></i><h4>Mobile / Online Pay</h4><p>Pay securely via our website or mobile app anytime.</p></div>
+        <div class="repay-item"></i><h4>Bank Transfer</h4><p>Transfer directly to our account using your reference number.</p></div>
+        <div class="repay-item"></i><h4>Early Repayment</h4><p>Pay off your loan early with no penalty. Contact us to get your settlement figure.</p></div>
+        <div class="repay-item"></i><h4>Payment Holiday</h4><p>Eligible customers can request a temporary payment pause. Terms apply.</p></div>
+        <div class="repay-item"></i><h4>Hardship Support</h4><p>Facing financial difficulty? Our team can discuss rescheduling or other options.</p></div>
       </div>
     </div>
   </section>
@@ -686,7 +695,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">How do I complain? <i class="fa-solid fa-chevron-down"></i></button>
-          <div class="faq-a">Contact us by phone, email, or our online form. If your complaint is not resolved within 8 weeks, you may escalate it to the relevant financial ombudsman.</div>
+          <div class="faq-a">Contact us by phone, email, or our online form. If your complaint is not resolved within 8 weeks,you cantake the complaint to an independent employee of Julius Quick Cash Finance .</div>
         </div>
       </div>
     </div>
@@ -701,10 +710,10 @@
       </div>
       <div class="contact-layout">
         <div class="contact-info">
-          <div class="contact-item"><i class="fa-solid fa-phone"></i><div><strong>Phone</strong><span>+256 75 166 0387 / +256 76 263 9656</span><small>Mon–Fri 8am–8pm, Sat 9am–5pm</small></div></div>
-          <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><span>support@JuliusQuickLoans.com</span><small>Response within 24 hours</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-phone"></i><div><strong>Phone</strong><span>+256 75 166 0387 <br>+256 76 263 9656</span><small>Mon–Fri: 8am–8pm <br> Sat: 9am–5pm <br>Sun: Closed</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><span>juliusquickcash@gmail.com</span><small>Response within 24 hours</small></div></div>
           <div class="contact-item"><i class="fa-solid fa-comments"></i><div><strong>Live Chat</strong><span>Available on this page</span><small>Mon–Fri 8am–10pm</small></div></div>
-          <div class="contact-item"><i class="fa-solid fa-map-pin"></i><div><strong>Office</strong><span>Mukiranya Street,plot 1230</span><small>Kasese Municipality, Uganda</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-map-pin"></i><div><strong>Office</strong><span>Stanely street, plot 400,<br> Kasese Municipality</span><small>Kampala, Uganda</small></div></div>
         </div>
         <div class="card contact-form-card">
           <h3>Send Us a Message</h3>
@@ -716,7 +725,7 @@
               </div>
               <div class="form-group">
                 <label for="cEmail">Email</label>
-                <input type="email" id="cEmail" placeholder="your@email.com" required />
+                <input type="email" id="cEmail" placeholder="youremail@gmail.com" required />
               </div>
             </div>
             <div class="form-group">
@@ -751,12 +760,12 @@
         <h2>Trust &amp; Compliance</h2>
       </div>
       <div class="legal-grid">
-        <div class="legal-item"><i class="fa-solid fa-certificate"></i><h4>Licensed Lender</h4><p>SwiftLend is licensed and regulated by the Financial Services Authority. License No. FSA-2010-LL-00423.</p></div>
-        <div class="legal-item"><i class="fa-solid fa-shield-halved"></i><h4>Data Protection</h4><p>Registered under applicable data protection laws. Your data is encrypted, never sold, and stored securely.</p></div>
-        <div class="legal-item"><i class="fa-solid fa-file-contract"></i><h4>Fair Contracts</h4><p>All loan agreements are written in plain language with full disclosure of rates, fees, and repayment terms.</p></div>
-        <div class="legal-item"><i class="fa-solid fa-scale-balanced"></i><h4>Fair Collections</h4><p>We follow responsible debt-collection practices. We never use harassment or intimidation.</p></div>
-        <div class="legal-item"><i class="fa-solid fa-hands-holding-circle"></i><h4>Responsible Lending</h4><p>We assess affordability before approving any loan. We only lend what you can realistically repay.</p></div>
-        <div class="legal-item"><i class="fa-solid fa-circle-exclamation"></i><h4>Warning</h4><p>Borrowing money costs money. Failure to meet repayments may affect your credit rating.</p></div>
+        <div class="legal-item"><h4>Licensed Lender</h4><p>Julius Quick Cash Finance is licensed and regulated by the Financial Services Authority. License No. FSA-2018-LL-0004.</p></div>
+        <div class="legal-item"></i><h4>Data Protection</h4><p>Registered under applicable data protection laws. Your data is encrypted, never sold, and stored securely.</p></div>
+        <div class="legal-item"></i><h4>Fair Contracts</h4><p>All loan agreements are written in plain language with full disclosure of rates, fees, and repayment terms.</p></div>
+        <div class="legal-item"></i><h4>Fair Collections</h4><p>We follow responsible debt-collection practices. We never use harassment or intimidation.</p></div>
+        <div class="legal-item"></i><h4>Responsible Lending</h4><p>We assess affordability before approving any loan. We only lend what you can realistically repay.</p></div>
+        <div class="legal-item"></i><h4>Warning</h4><p>Borrowing money costs money. Failure to meet repayments may affect your credit rating.</p></div>
       </div>
       <div class="legal-links">
         <a href="#">Privacy Policy</a>
@@ -772,7 +781,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <div class="logo"><i class="fa-solid fa-landmark"></i> Julius Quick Loans</div>
+        <div class="logo"></i> Julius Quick Cash Finance </div>
         <p>Transparent, affordable loans with simple applications and dependable customer support.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -792,7 +801,7 @@
       </div>
       <div class="footer-col">
         <h5>Tools</h5>
-        <ul>
+        <u>
           <!--<li><a href="#calculator">Loan Calculator</a></li>-->
           <li><a href="#eligibility">Eligibility Checker</a></li>
           <li><a href="#track">Track Application</a></li>
@@ -810,7 +819,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Julius Quick Loans. All rights reserved. Julius Quick Loans is a licensed lending institution.</p>
+      <p>&copy; 2026 Julius Quick Cash Financial Services. All rights reserved. Julius Quick Cash Finance is a licensed lending institution.</p>
     </div>
   </footer>
 
@@ -825,7 +834,7 @@
       <button onclick="toggleChat()" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="chat-body">
-      <div class="chat-msg agent">Hi! I'm Dan from Julius Quick Loans. How can I help you today?</div>
+      <div class="chat-msg agent">Hi! I'm Dan from Julius Quick Cash Finance. How can I help you today?</div>
     </div>
     <div class="chat-input-row">
       <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()" />
