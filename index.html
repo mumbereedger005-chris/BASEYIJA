@@ -1,307 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baseyija Hotel Management System</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwiftLend – Loans You Can Trust</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-hotel"></i> Baseyija Hotel Management</h1>
-            <nav>
-                <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
-                <button class="nav-btn" data-tab="rooms">Rooms</button>
-                <button class="nav-btn" data-tab="bookings">Bookings</button>
-                <button class="nav-btn" data-tab="guests">Guests</button>
-                <button class="nav-btn" data-tab="staff">Staff</button>
-                <button class="nav-btn" data-tab="reports">Reports</button>
-            </nav>
-        </header>
 
-        <main>
-            <!-- Dashboard -->
-            <section id="dashboard" class="tab-content active">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-bed"></i>
-                        <div class="stat-info">
-                            <h3 id="totalRooms">0</h3>
-                            <p>Total Rooms</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-user-check"></i>
-                        <div class="stat-info">
-                            <h3 id="occupiedRooms">0</h3>
-                            <p>Occupied</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-users"></i>
-                        <div class="stat-info">
-                            <h3 id="totalGuests">0</h3>
-                            <p>Total Guests</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <div class="stat-info">
-                            <h3 id="revenue">$0</h3>
-                            <p>Revenue</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-section">
-                    <h2>Recent Bookings</h2>
-                    <table id="recentBookings">
-                        <thead>
-                            <tr>
-                                <th>Guest Name</th>
-                                <th>Room</th>
-                                <th>Check-in</th>
-                                <th>Check-out</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Rooms Management -->
-            <section id="rooms" class="tab-content">
-                <div class="section-header">
-                    <h2>Room Management</h2>
-                    <button onclick="showAddRoomModal()" class="btn-primary">
-                        <i class="fas fa-plus"></i> Add Room
-                    </button>
-                </div>
-                <div class="rooms-grid" id="roomsGrid"></div>
-            </section>
-
-            <!-- Bookings Management -->
-            <section id="bookings" class="tab-content">
-                <div class="section-header">
-                    <h2>Booking Management</h2>
-                    <button onclick="showAddBookingModal()" class="btn-primary">
-                        <i class="fas fa-plus"></i> New Booking
-                    </button>
-                </div>
-                <table id="bookingsTable">
-                    <thead>
-                        <tr>
-                            <th>Booking ID</th>
-                            <th>Guest</th>
-                            <th>Room</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Total Cost</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
-
-            <!-- Guests Management -->
-            <section id="guests" class="tab-content">
-                <div class="section-header">
-                    <h2>Guest Management</h2>
-                    <button onclick="showAddGuestModal()" class="btn-primary">
-                        <i class="fas fa-plus"></i> Add Guest
-                    </button>
-                </div>
-                <table id="guestsTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>ID/Passport</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
-
-            <!-- Staff Management -->
-            <section id="staff" class="tab-content">
-                <div class="section-header">
-                    <h2>Staff Management</h2>
-                    <button onclick="showAddStaffModal()" class="btn-primary">
-                        <i class="fas fa-plus"></i> Add Staff
-                    </button>
-                </div>
-                <table id="staffTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th>Shift</th>
-                            <th>Salary</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
-
-            <!-- Reports -->
-            <section id="reports" class="tab-content">
-                <h2>Reports & Analytics</h2>
-                <div class="reports-grid">
-                    <div class="report-card">
-                        <h3>Occupancy Rate</h3>
-                        <div class="progress-bar">
-                            <div id="occupancyBar" class="progress"></div>
-                        </div>
-                        <p id="occupancyRate">0%</p>
-                    </div>
-                    <div class="report-card">
-                        <h3>Revenue Overview</h3>
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                    <div class="report-card">
-                        <h3>Room Status Breakdown</h3>
-                        <div id="roomStatusBreakdown"></div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Modals -->
-        <div id="roomModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('roomModal')">&times;</span>
-                <h3 id="roomModalTitle">Add Room</h3>
-                <form id="roomForm">
-                    <input type="hidden" id="roomId">
-                    <div class="form-group">
-                        <label>Room Number</label>
-                        <input type="text" id="roomNumber" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Room Type</label>
-                        <select id="roomType" required>
-                            <option value="single">Single</option>
-                            <option value="double">Double</option>
-                            <option value="suite">Suite</option>
-                            <option value="deluxe">Deluxe</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Price per Night</label>
-                        <input type="number" id="roomPrice" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select id="roomStatus">
-                            <option value="available">Available</option>
-                            <option value="occupied">Occupied</option>
-                            <option value="maintenance">Under Maintenance</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-primary">Save Room</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="bookingModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('bookingModal')">&times;</span>
-                <h3>New Booking</h3>
-                <form id="bookingForm">
-                    <div class="form-group">
-                        <label>Guest</label>
-                        <select id="bookingGuest" required></select>
-                    </div>
-                    <div class="form-group">
-                        <label>Room</label>
-                        <select id="bookingRoom" required></select>
-                    </div>
-                    <div class="form-group">
-                        <label>Check-in Date</label>
-                        <input type="date" id="bookingCheckIn" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Check-out Date</label>
-                        <input type="date" id="bookingCheckOut" required>
-                    </div>
-                    <button type="submit" class="btn-primary">Create Booking</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="guestModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('guestModal')">&times;</span>
-                <h3>Add Guest</h3>
-                <form id="guestForm">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="guestName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="guestEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="tel" id="guestPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label>ID/Passport Number</label>
-                        <input type="text" id="guestId" required>
-                    </div>
-                    <button type="submit" class="btn-primary">Add Guest</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="staffModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('staffModal')">&times;</span>
-                <h3>Add Staff</h3>
-                <form id="staffForm">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="staffName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Role</label>
-                        <select id="staffRole" required>
-                            <option value="manager">Manager</option>
-                            <option value="receptionist">Receptionist</option>
-                            <option value="housekeeping">Housekeeping</option>
-                            <option value="chef">Chef</option>
-                            <option value="waiter">Waiter</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Shift</label>
-                        <select id="staffShift">
-                            <option value="morning">Morning (6AM-2PM)</option>
-                            <option value="afternoon">Afternoon (2PM-10PM)</option>
-                            <option value="night">Night (10PM-6AM)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Salary</label>
-                        <input type="number" id="staffSalary" required>
-                    </div>
-                    <button type="submit" class="btn-primary">Add Staff</button>
-                </form>
-            </div>
-        </div>
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="top">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <i class="fa-solid fa-landmark"></i> SwiftLend
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#loans">Loans</a></li>
+          <li><a href="#calculator">Calculator</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li><a href="#apply">Apply</a></li>
+          <li><a href="#account">My Account</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#apply" class="btn btn-primary nav-cta">Apply Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
+  </header>
 
-    <script src="js/script.js"></script>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" id="closeMenu" aria-label="Close menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul>
+      <li><a href="#loans" onclick="closeMobile()">Loans</a></li>
+      <li><a href="#calculator" onclick="closeMobile()">Calculator</a></li>
+      <li><a href="#eligibility" onclick="closeMobile()">Eligibility</a></li>
+      <li><a href="#apply" onclick="closeMobile()">Apply</a></li>
+      <li><a href="#account" onclick="closeMobile()">My Account</a></li>
+      <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="badge">Trusted Since 2010</span>
+      <h1>Fast, Transparent Loans<br />Built Around You</h1>
+      <p>Affordable personal and business loans with clear terms, simple applications, and same-day decisions.</p>
+      <div class="hero-btns">
+        <a href="#apply" class="btn btn-primary">Apply Now</a>
+        <a href="#loans" class="btn btn-outline">View Loan Options</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>15,000+</strong><span>Customers Served</span></div>
+        <div class="stat"><strong>98%</strong><span>Approval Satisfaction</span></div>
+        <div class="stat"><strong>24 hrs</strong><span>Average Payout</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BAR ===== -->
+  <div class="trust-bar">
+    <div class="container trust-inner">
+      <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Licensed &amp; Regulated</div>
+      <div class="trust-item"><i class="fa-solid fa-lock"></i> Bank-Level Security</div>
+      <div class="trust-item"><i class="fa-solid fa-file-contract"></i> No Hidden Fees</div>
+      <div class="trust-item"><i class="fa-solid fa-headset"></i> 24/7 Support</div>
+      <div class="trust-item"><i class="fa-solid fa-bolt"></i> Fast Approval</div>
+    </div>
+  </div>
+
+  <!-- ===== LOAN PRODUCTS ===== -->
+  <section class="section" id="loans">
+    <div class="container">
+      <div class="section-head">
+        <h2>Our Loan Products</h2>
+        <p>Choose the loan that fits your needs. All products come with clear rates, fixed repayment schedules, and no surprise fees.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="card loan-card">
+          <div class="card-icon blue"><i class="fa-solid fa-user"></i></div>
+          <h3>Personal Loan</h3>
+          <ul class="loan-details">
+            <li><i class="fa-solid fa-check"></i> Amount: $500 – $50,000</li>
+            <li><i class="fa-solid fa-check"></i> Term: 6 – 60 months</li>
+            <li><i class="fa-solid fa-check"></i> Interest: from 8.9% p.a.</li>
+            <li><i class="fa-solid fa-check"></i> No collateral required</li>
+          </ul>
+          <a href="#apply" class="btn btn-primary full-width">Apply</a>
+        </div>
+
+        <div class="card loan-card featured">
+          <div class="featured-tag">Most Popular</div>
+          <div class="card-icon green"><i class="fa-solid fa-briefcase"></i></div>
+          <h3>Business Loan</h3>
+          <ul class="loan-details">
+            <li><i class="fa-solid fa-check"></i> Amount: $5,000 – $500,000</li>
+            <li><i class="fa-solid fa-check"></i> Term: 12 – 84 months</li>
+            <li><i class="fa-solid fa-check"></i> Interest: from 6.5% p.a.</li>
+            <li><i class="fa-solid fa-check"></i> Flexible repayment</li>
+          </ul>
+          <a href="#apply" class="btn btn-primary full-width">Apply</a>
+        </div>
+
+        <div class="card loan-card">
+          <div class="card-icon orange"><i class="fa-solid fa-house"></i></div>
+          <h3>Home Loan</h3>
+          <ul class="loan-details">
+            <li><i class="fa-solid fa-check"></i> Amount: $20,000 – $2,000,000</li>
+            <li><i class="fa-solid fa-check"></i> Term: 5 – 30 years</li>
+            <li><i class="fa-solid fa-check"></i> Interest: from 4.5% p.a.</li>
+            <li><i class="fa-solid fa-check"></i> Fixed &amp; variable rates</li>
+          </ul>
+          <a href="#apply" class="btn btn-primary full-width">Apply</a>
+        </div>
+
+        <div class="card loan-card">
+          <div class="card-icon purple"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3>Education Loan</h3>
+          <ul class="loan-details">
+            <li><i class="fa-solid fa-check"></i> Amount: $1,000 – $80,000</li>
+            <li><i class="fa-solid fa-check"></i> Term: 12 – 120 months</li>
+            <li><i class="fa-solid fa-check"></i> Interest: from 5.9% p.a.</li>
+            <li><i class="fa-solid fa-check"></i> Deferred repayment option</li>
+          </ul>
+          <a href="#apply" class="btn btn-primary full-width">Apply</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOAN CALCULATOR ===== -->
+  <section class="section bg-light" id="calculator">
+    <div class="container">
+      <div class="section-head">
+        <h2>Loan Calculator</h2>
+        <p>Estimate your monthly repayment and total interest before you apply. No commitment required.</p>
+      </div>
+      <div class="calc-wrapper">
+        <div class="calc-form">
+
+          <div class="form-group">
+            <label for="calcAmount">Loan Amount ($)</label>
+            <input type="range" id="calcAmount" min="500" max="500000" step="500" value="10000" oninput="calcUpdate()" />
+            <div class="range-value">$<span id="amountDisplay">10,000</span></div>
+          </div>
+
+          <div class="form-group">
+            <label for="calcTerm">Repayment Period (months)</label>
+            <input type="range" id="calcTerm" min="6" max="360" step="6" value="24" oninput="calcUpdate()" />
+            <div class="range-value"><span id="termDisplay">24</span> months</div>
+          </div>
+
+          <div class="form-group">
+            <label for="calcRate">Annual Interest Rate (%)</label>
+            <input type="range" id="calcRate" min="3" max="30" step="0.1" value="9" oninput="calcUpdate()" />
+            <div class="range-value"><span id="rateDisplay">9.0</span>%</div>
+          </div>
+
+        </div>
+        <div class="calc-result">
+          <div class="result-item highlight">
+            <span>Monthly Repayment</span>
+            <strong id="monthlyResult">$456.85</strong>
+          </div>
+          <div class="result-item">
+            <span>Total Repayment</span>
+            <strong id="totalResult">$10,964.40</strong>
+          </div>
+          <div class="result-item">
+            <span>Total Interest</span>
+            <strong id="interestResult">$964.40</strong>
+          </div>
+          <p class="calc-disclaimer">This is an estimate only. Actual repayments may vary based on your credit profile.</p>
+          <a href="#apply" class="btn btn-primary full-width">Apply for This Loan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ELIGIBILITY CHECKER ===== -->
+  <section class="section" id="eligibility">
+    <div class="container narrow">
+      <div class="section-head">
+        <h2>Check Your Eligibility</h2>
+        <p>Answer a few quick questions to see if you qualify. It won't affect your credit score.</p>
+      </div>
+      <form class="eligibility-form card" id="eligibilityForm" onsubmit="checkEligibility(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eAge">Age</label>
+            <input type="number" id="eAge" placeholder="e.g. 28" min="18" max="70" required />
+          </div>
+          <div class="form-group">
+            <label for="eIncome">Monthly Income ($)</label>
+            <input type="number" id="eIncome" placeholder="e.g. 3000" min="0" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eEmployment">Employment Status</label>
+            <select id="eEmployment" required>
+              <option value="">Select...</option>
+              <option>Full-time employed</option>
+              <option>Part-time employed</option>
+              <option>Self-employed</option>
+              <option>Business owner</option>
+              <option>Retired</option>
+              <option>Unemployed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="eLoanType">Loan Type</label>
+            <select id="eLoanType" required>
+              <option value="">Select...</option>
+              <option>Personal Loan</option>
+              <option>Business Loan</option>
+              <option>Home Loan</option>
+              <option>Education Loan</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="eLoanAmount">Desired Loan Amount ($)</label>
+          <input type="number" id="eLoanAmount" placeholder="e.g. 15000" min="500" required />
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Check Eligibility</button>
+      </form>
+      <div class="eligibility-result" id="eligibilityResult" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- ===== ONLINE APPLICATION ===== -->
+  <section class="section bg-light" id="apply">
+    <div class="container narrow">
+      <div class="section-head">
+        <h2>Apply for a Loan</h2>
+        <p>Secure application. Decisions within 24 hours. All information is encrypted and handled in accordance with our privacy policy.</p>
+      </div>
+
+      <!-- Step indicators -->
+      <div class="steps" id="stepIndicator">
+        <div class="step active" data-step="1"><span>1</span> Personal Details</div>
+        <div class="step" data-step="2"><span>2</span> Loan Details</div>
+        <div class="step" data-step="3"><span>3</span> Documents &amp; ID Scan</div>
+        <div class="step" data-step="4"><span>4</span> Review &amp; Submit</div>
+      </div>
+
+      <form id="loanApplicationForm" class="app-form card">
+
+        <!-- Step 1: Personal Details -->
+        <div class="form-step" id="step1">
+          <h3>Personal Details</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" placeholder="Smith" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dob">Date of Birth *</label>
+              <input type="date" id="dob" required />
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender">
+                <option value="">Prefer not to say</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="john@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" placeholder="+1 555 000 0000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Residential Address *</label>
+            <input type="text" id="address" placeholder="123 Main Street, City, State, ZIP" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="employment">Employment Status *</label>
+              <select id="employment" required>
+                <option value="">Select...</option>
+                <option>Full-time employed</option>
+                <option>Part-time employed</option>
+                <option>Self-employed</option>
+                <option>Business owner</option>
+                <option>Retired</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="income">Monthly Income ($) *</label>
+              <input type="number" id="income" placeholder="e.g. 4000" required />
+            </div>
+          </div>
+          <div class="step-btns">
+            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next: Loan Details <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Step 2: Loan Details -->
+        <div class="form-step hidden" id="step2">
+          <h3>Loan Details</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="loanType">Loan Type *</label>
+              <select id="loanType" required>
+                <option value="">Select...</option>
+                <option>Personal Loan</option>
+                <option>Business Loan</option>
+                <option>Home Loan</option>
+                <option>Education Loan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="loanAmount">Loan Amount ($) *</label>
+              <input type="number" id="loanAmount" placeholder="e.g. 15000" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="loanTerm">Repayment Period *</label>
+              <select id="loanTerm" required>
+                <option value="">Select...</option>
+                <option>6 months</option>
+                <option>12 months</option>
+                <option>24 months</option>
+                <option>36 months</option>
+                <option>48 months</option>
+                <option>60 months</option>
+                <option>84 months</option>
+                <option>120 months</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="loanPurpose">Loan Purpose *</label>
+              <select id="loanPurpose" required>
+                <option value="">Select...</option>
+                <option>Debt consolidation</option>
+                <option>Home improvement</option>
+                <option>Medical expenses</option>
+                <option>Education</option>
+                <option>Business investment</option>
+                <option>Vehicle purchase</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="loanNotes">Additional Notes</label>
+            <textarea id="loanNotes" rows="3" placeholder="Any other details about your loan request..."></textarea>
+          </div>
+          <div class="step-btns">
+            <button type="button" class="btn btn-outline" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next: Documents <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Documents & ID Scan -->
+        <div class="form-step hidden" id="step3">
+          <h3>Documents &amp; ID Verification</h3>
+          <p class="step-desc">We need to verify your identity and income. Please upload or scan the required documents. All files are encrypted and stored securely.</p>
+
+          <!-- ID Scan Section -->
+          <div class="id-scan-section">
+            <div class="id-scan-header">
+              <i class="fa-solid fa-id-card"></i>
+              <div>
+                <h4>Government-Issued ID Scan</h4>
+                <p>Accepted: National ID, Passport, Driver's Licence</p>
+              </div>
+            </div>
+
+            <div class="scan-options">
+              <!-- Camera Scan -->
+              <div class="scan-option" id="cameraScanBox">
+                <i class="fa-solid fa-camera"></i>
+                <h5>Scan with Camera</h5>
+                <p>Use your device camera to capture your ID</p>
+                <button type="button" class="btn btn-outline" onclick="startCamera()">
+                  <i class="fa-solid fa-camera"></i> Open Camera
+                </button>
+                <div class="camera-container" id="cameraContainer" style="display:none;">
+                  <video id="cameraFeed" autoplay playsinline></video>
+                  <canvas id="cameraCanvas" style="display:none;"></canvas>
+                  <div class="camera-controls">
+                    <button type="button" class="btn btn-primary" onclick="capturePhoto()">
+                      <i class="fa-solid fa-circle-dot"></i> Capture ID
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="stopCamera()">
+                      <i class="fa-solid fa-xmark"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+                <div id="capturedIdPreview" style="display:none;">
+                  <img id="capturedIdImg" src="" alt="Captured ID" />
+                  <div class="camera-controls">
+                    <button type="button" class="btn btn-outline small" onclick="retakePhoto()">
+                      <i class="fa-solid fa-rotate-left"></i> Retake
+                    </button>
+                    <span class="captured-label"><i class="fa-solid fa-circle-check"></i> ID Captured</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- File Upload -->
+              <div class="scan-option">
+                <i class="fa-solid fa-upload"></i>
+                <h5>Upload ID Document</h5>
+                <p>Upload a clear photo or scan (JPG, PNG, PDF)</p>
+                <label class="upload-label" for="idUpload">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Choose File
+                  <input type="file" id="idUpload" accept="image/*,.pdf" onchange="previewIdUpload(event)" />
+                </label>
+                <div id="idUploadPreview" style="display:none;">
+                  <img id="idUploadImg" src="" alt="Uploaded ID" />
+                  <p id="idUploadName" class="file-name"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="id-tips">
+              <h5><i class="fa-solid fa-circle-info"></i> Tips for a clear ID scan</h5>
+              <ul>
+                <li>Make sure all four corners of the ID are visible</li>
+                <li>Ensure the text is clearly readable — no blurs or glare</li>
+                <li>Use good lighting; avoid shadows across the document</li>
+                <li>Do not cover any part of the ID with your fingers</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Other Documents -->
+          <div class="doc-upload-section">
+            <h4><i class="fa-solid fa-file-arrow-up"></i> Supporting Documents</h4>
+            <div class="doc-grid">
+              <div class="doc-upload-item">
+                <label for="proofIncome">
+                  <i class="fa-solid fa-money-bill-wave"></i>
+                  <span>Proof of Income</span>
+                  <small>Pay slip, bank statement (last 3 months)</small>
+                </label>
+                <input type="file" id="proofIncome" accept="image/*,.pdf" onchange="showFileName(this,'incomeFileName')" />
+                <p class="file-name" id="incomeFileName">No file chosen</p>
+              </div>
+              <div class="doc-upload-item">
+                <label for="proofAddress">
+                  <i class="fa-solid fa-map-marker-alt"></i>
+                  <span>Proof of Address</span>
+                  <small>Utility bill, bank letter (last 3 months)</small>
+                </label>
+                <input type="file" id="proofAddress" accept="image/*,.pdf" onchange="showFileName(this,'addressFileName')" />
+                <p class="file-name" id="addressFileName">No file chosen</p>
+              </div>
+              <div class="doc-upload-item">
+                <label for="bankStatement">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Bank Statements</span>
+                  <small>Last 3–6 months of statements</small>
+                </label>
+                <input type="file" id="bankStatement" accept="image/*,.pdf" multiple onchange="showFileName(this,'bankFileName')" />
+                <p class="file-name" id="bankFileName">No file chosen</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-btns">
+            <button type="button" class="btn btn-outline" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next: Review <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Submit -->
+        <div class="form-step hidden" id="step4">
+          <h3>Review &amp; Submit</h3>
+          <div id="reviewSummary" class="review-summary"></div>
+
+          <div class="consent-box">
+            <label class="checkbox-label">
+              <input type="checkbox" id="consentPrivacy" required />
+              I have read and agree to the <a href="#legal" target="_blank">Privacy Policy</a> and consent to a credit check.
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="consentTerms" required />
+              I have read and agree to the <a href="#legal" target="_blank">Terms &amp; Conditions</a> and <a href="#legal" target="_blank">Loan Agreement</a>.
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="consentAccurate" required />
+              I confirm that all information provided is accurate and complete.
+            </label>
+          </div>
+
+          <div class="step-btns">
+            <button type="button" class="btn btn-outline" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button type="submit" class="btn btn-primary btn-large">
+              <i class="fa-solid fa-paper-plane"></i> Submit Application
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Success message -->
+      <div class="success-msg" id="successMsg" style="display:none;">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Application Submitted!</h3>
+        <p>Thank you. Your reference number is <strong id="refNumber">SL-2026-00142</strong>. We will review your application and contact you within 24 hours.</p>
+        <a href="#track" class="btn btn-primary">Track Application</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLICATION TRACKING ===== -->
+  <section class="section" id="track">
+    <div class="container narrow">
+      <div class="section-head">
+        <h2>Track Your Application</h2>
+        <p>Enter your reference number to check the status of your loan application.</p>
+      </div>
+      <div class="card track-card">
+        <div class="form-row">
+          <div class="form-group flex-grow">
+            <label for="trackRef">Reference Number</label>
+            <input type="text" id="trackRef" placeholder="e.g. SL-2026-00142" />
+          </div>
+          <div class="form-group">
+            <label for="trackEmail">Email Address</label>
+            <input type="email" id="trackEmail" placeholder="Registered email" />
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="trackApplication()">
+          <i class="fa-solid fa-magnifying-glass"></i> Check Status
+        </button>
+        <div id="trackResult" class="track-result" style="display:none;">
+          <div class="track-timeline">
+            <div class="track-step done"><i class="fa-solid fa-circle-check"></i><span>Application Received</span><small>Sep 25, 2026</small></div>
+            <div class="track-step done"><i class="fa-solid fa-circle-check"></i><span>Documents Verified</span><small>Sep 25, 2026</small></div>
+            <div class="track-step active"><i class="fa-solid fa-circle-half-stroke"></i><span>Credit Assessment</span><small>In Progress</small></div>
+            <div class="track-step"><i class="fa-regular fa-circle"></i><span>Decision</span><small>Pending</small></div>
+            <div class="track-step"><i class="fa-regular fa-circle"></i><span>Funds Disbursed</span><small>Pending</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CUSTOMER ACCOUNT ===== -->
+  <section class="section bg-light" id="account">
+    <div class="container">
+      <div class="section-head">
+        <h2>Customer Account</h2>
+        <p>Log in to view your loan balance, payment schedule, statements, and repayment history.</p>
+      </div>
+      <div class="account-layout">
+        <!-- Login card -->
+        <div class="card login-card" id="loginCard">
+          <h3><i class="fa-solid fa-right-to-bracket"></i> Log In</h3>
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass" placeholder="••••••••" />
+          </div>
+          <button class="btn btn-primary full-width" onclick="simulateLogin()">Log In</button>
+          <p class="small-link"><a href="#">Forgot password?</a> &nbsp;|&nbsp; <a href="#apply">Register / Apply</a></p>
+        </div>
+
+        <!-- Dashboard (shown after login simulation) -->
+        <div class="account-dashboard hidden" id="accountDashboard">
+          <div class="dash-welcome">
+            <h3>Welcome back, <span id="dashName">John Smith</span></h3>
+            <button class="btn btn-outline small" onclick="logout()">Log Out</button>
+          </div>
+          <div class="dash-cards">
+            <div class="dash-card blue">
+              <i class="fa-solid fa-sack-dollar"></i>
+              <div><span>Outstanding Balance</span><strong>$8,450.00</strong></div>
+            </div>
+            <div class="dash-card green">
+              <i class="fa-solid fa-calendar-check"></i>
+              <div><span>Next Payment Due</span><strong>Oct 1, 2026</strong></div>
+            </div>
+            <div class="dash-card orange">
+              <i class="fa-solid fa-hourglass-half"></i>
+              <div><span>Remaining Term</span><strong>22 months</strong></div>
+            </div>
+            <div class="dash-card purple">
+              <i class="fa-solid fa-circle-check"></i>
+              <div><span>Payments Made</span><strong>14 / 36</strong></div>
+            </div>
+          </div>
+          <div class="dash-section">
+            <h4>Payment Schedule</h4>
+            <table class="payment-table">
+              <thead>
+                <tr><th>#</th><th>Due Date</th><th>Amount</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>14</td><td>Sep 1, 2026</td><td>$385.00</td><td><span class="badge-status paid">Paid</span></td></tr>
+                <tr><td>15</td><td>Oct 1, 2026</td><td>$385.00</td><td><span class="badge-status due">Due</span></td></tr>
+                <tr><td>16</td><td>Nov 1, 2026</td><td>$385.00</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
+                <tr><td>17</td><td>Dec 1, 2026</td><td>$385.00</td><td><span class="badge-status upcoming">Upcoming</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dash-actions">
+            <button class="btn btn-primary"><i class="fa-solid fa-credit-card"></i> Make a Payment</button>
+            <button class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Download Statement</button>
+            <button class="btn btn-outline"><i class="fa-solid fa-phone"></i> Request Reschedule</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REPAYMENT OPTIONS ===== -->
+  <section class="section" id="repayment">
+    <div class="container">
+      <div class="section-head">
+        <h2>Repayment Options</h2>
+        <p>Convenient ways to manage and pay your loan.</p>
+      </div>
+      <div class="repay-grid">
+        <div class="repay-item"><i class="fa-solid fa-rotate"></i><h4>Auto-Debit</h4><p>Set up automatic monthly deductions from your bank account. Never miss a payment.</p></div>
+        <div class="repay-item"><i class="fa-solid fa-mobile-screen-button"></i><h4>Mobile / Online Pay</h4><p>Pay securely via our website or mobile app anytime.</p></div>
+        <div class="repay-item"><i class="fa-solid fa-building-columns"></i><h4>Bank Transfer</h4><p>Transfer directly to our account using your reference number.</p></div>
+        <div class="repay-item"><i class="fa-solid fa-forward-fast"></i><h4>Early Repayment</h4><p>Pay off your loan early with no penalty. Contact us to get your settlement figure.</p></div>
+        <div class="repay-item"><i class="fa-solid fa-calendar-days"></i><h4>Payment Holiday</h4><p>Eligible customers can request a temporary payment pause. Terms apply.</p></div>
+        <div class="repay-item"><i class="fa-solid fa-handshake-angle"></i><h4>Hardship Support</h4><p>Facing financial difficulty? Our team can discuss rescheduling or other options.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section bg-light" id="faq">
+    <div class="container narrow">
+      <div class="section-head">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How long does approval take? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">Most applications receive a decision within 24 hours. Complex or high-value loans may take up to 3 business days.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Will applying affect my credit score? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">The eligibility checker uses a soft check that does not affect your credit score. A full credit check is only run when you formally submit an application.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What documents do I need? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">You will need a valid government-issued ID, proof of income (pay slips or bank statements), and proof of address dated within the last 3 months.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I repay my loan early? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">Yes. We charge no early repayment penalties. Contact our support team to receive your settlement figure and arrange the final payment.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is my personal data safe? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">Yes. All data is encrypted using 256-bit SSL. We are registered under applicable data protection regulations and will never sell your information to third parties.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I complain? <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="faq-a">Contact us by phone, email, or our online form. If your complaint is not resolved within 8 weeks, you may escalate it to the relevant financial ombudsman.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT & SUPPORT ===== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact &amp; Support</h2>
+        <p>Our team is available 24/7 to help with applications, repayments, and general enquiries.</p>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="contact-item"><i class="fa-solid fa-phone"></i><div><strong>Phone</strong><span>+1 (800) 795-4363</span><small>Mon–Fri 8am–8pm, Sat 9am–5pm</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><span>support@swiftlend.com</span><small>Response within 24 hours</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-comments"></i><div><strong>Live Chat</strong><span>Available on this page</span><small>Mon–Fri 8am–10pm</small></div></div>
+          <div class="contact-item"><i class="fa-solid fa-map-pin"></i><div><strong>Office</strong><span>100 Finance Way, Suite 400</span><small>New York, NY 10001</small></div></div>
+        </div>
+        <div class="card contact-form-card">
+          <h3>Send Us a Message</h3>
+          <form onsubmit="submitContact(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="cEmail">Email</label>
+                <input type="email" id="cEmail" placeholder="your@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cSubject">Subject</label>
+              <select id="cSubject">
+                <option>General Enquiry</option>
+                <option>Loan Application Help</option>
+                <option>Repayment Query</option>
+                <option>Complaint</option>
+                <option>Financial Hardship</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cMsg">Message</label>
+              <textarea id="cMsg" rows="4" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width">Send Message</button>
+          </form>
+          <div id="contactSuccess" style="display:none;" class="inline-success">
+            <i class="fa-solid fa-circle-check"></i> Message sent! We'll be in touch within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEGAL / TRUST ===== -->
+  <section class="section bg-light" id="legal">
+    <div class="container">
+      <div class="section-head">
+        <h2>Trust &amp; Compliance</h2>
+      </div>
+      <div class="legal-grid">
+        <div class="legal-item"><i class="fa-solid fa-certificate"></i><h4>Licensed Lender</h4><p>SwiftLend is licensed and regulated by the Financial Services Authority. License No. FSA-2010-LL-00423.</p></div>
+        <div class="legal-item"><i class="fa-solid fa-shield-halved"></i><h4>Data Protection</h4><p>Registered under applicable data protection laws. Your data is encrypted, never sold, and stored securely.</p></div>
+        <div class="legal-item"><i class="fa-solid fa-file-contract"></i><h4>Fair Contracts</h4><p>All loan agreements are written in plain language with full disclosure of rates, fees, and repayment terms.</p></div>
+        <div class="legal-item"><i class="fa-solid fa-scale-balanced"></i><h4>Fair Collections</h4><p>We follow responsible debt-collection practices. We never use harassment or intimidation.</p></div>
+        <div class="legal-item"><i class="fa-solid fa-hands-holding-circle"></i><h4>Responsible Lending</h4><p>We assess affordability before approving any loan. We only lend what you can realistically repay.</p></div>
+        <div class="legal-item"><i class="fa-solid fa-circle-exclamation"></i><h4>Warning</h4><p>Borrowing money costs money. Failure to meet repayments may affect your credit rating.</p></div>
+      </div>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Complaints Procedure</a>
+        <a href="#">Responsible Lending Policy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><i class="fa-solid fa-landmark"></i> SwiftLend</div>
+        <p>Transparent, affordable loans with simple applications and dependable customer support.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Loans</h5>
+        <ul>
+          <li><a href="#loans">Personal Loan</a></li>
+          <li><a href="#loans">Business Loan</a></li>
+          <li><a href="#loans">Home Loan</a></li>
+          <li><a href="#loans">Education Loan</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <ul>
+          <li><a href="#calculator">Loan Calculator</a></li>
+          <li><a href="#eligibility">Eligibility Checker</a></li>
+          <li><a href="#track">Track Application</a></li>
+          <li><a href="#account">My Account</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#legal">About Us</a></li>
+          <li><a href="#legal">Trust &amp; Compliance</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SwiftLend Financial Services. All rights reserved. SwiftLend is a licensed lending institution.</p>
+    </div>
+  </footer>
+
+  <!-- Live Chat Button -->
+  <button class="chat-fab" aria-label="Live Chat" onclick="toggleChat()">
+    <i class="fa-solid fa-comments"></i>
+    <span class="chat-badge">1</span>
+  </button>
+  <div class="chat-popup" id="chatPopup" style="display:none;">
+    <div class="chat-header">
+      <span><i class="fa-solid fa-headset"></i> Live Support</span>
+      <button onclick="toggleChat()" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="chat-body">
+      <div class="chat-msg agent">Hi! I'm Alex from SwiftLend. How can I help you today?</div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()" />
+      <button onclick="sendChat()" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
