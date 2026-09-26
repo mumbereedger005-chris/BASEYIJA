@@ -1,0 +1,666 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyakere Engineering Services – Building Quality, Delivering Excellence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0a1f44;
+      --gold:  #f5b800;
+      --gold2: #e0a800;
+      --white: #ffffff;
+      --light: #f4f6fa;
+      --gray:  #6b7280;
+      --dark:  #111827;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(10,31,68,.10);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--dark); background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-head { text-align: center; margin-bottom: 52px; }
+    .section-head h2 { font-size: 2.1rem; color: var(--navy); font-weight: 800; margin-bottom: 12px; }
+    .section-head p  { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .bg-light { background: var(--light); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 6px; font-weight: 700;
+      font-size: .95rem; cursor: pointer; border: 2px solid transparent;
+      transition: all .2s;
+    }
+    .btn-primary { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .btn-primary:hover { background: var(--gold2); border-color: var(--gold2); }
+    .btn-outline  { background: transparent; color: var(--navy); border-color: var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-white    { background: var(--white); color: var(--navy); border-color: var(--white); }
+    .btn-white:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: var(--navy); box-shadow: 0 2px 16px rgba(0,0,0,.18);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 46px; height: 46px; background: var(--gold); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--navy);
+    }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .logo-text strong { color: var(--white); font-size: 1.1rem; font-weight: 800; }
+    .logo-text span   { color: var(--gold); font-size: .72rem; letter-spacing: 1px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      color: rgba(255,255,255,.85); padding: 8px 14px; border-radius: 5px;
+      font-size: .9rem; font-weight: 500; transition: background .2s, color .2s;
+    }
+    .nav-links a:hover { background: rgba(245,184,0,.15); color: var(--gold); }
+    .nav-cta { padding: 10px 22px; font-size: .9rem; }
+    .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: var(--navy); flex-direction: column;
+      align-items: center; justify-content: center; gap: 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--white); font-size: 1.3rem; font-weight: 700; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .close-mobile { position: absolute; top: 22px; right: 24px; background: none; border: none; color: var(--white); font-size: 1.8rem; cursor: pointer; }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 70px;
+      background: linear-gradient(120deg, var(--navy) 55%, #162d5e 100%);
+      padding: 90px 0 70px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+      background: var(--gold);
+    }
+    .hero-inner { display: flex; align-items: center; gap: 56px; }
+    .hero-text { flex: 1; }
+    .hero-badge {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-size: .78rem; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px;
+    }
+    .hero-text h1 {
+      font-size: 3rem; color: var(--white); font-weight: 900;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .hero-text h1 span { color: var(--gold); }
+    .hero-text p { color: rgba(255,255,255,.78); font-size: 1.1rem; margin-bottom: 32px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-image { flex: 1; max-width: 460px; }
+    .hero-image img { border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat strong { display: block; font-size: 1.7rem; color: var(--gold); font-weight: 900; }
+    .hero-stat span   { color: rgba(255,255,255,.7); font-size: .82rem; }
+
+    /* ── INFO BAR ── */
+    .info-bar { background: var(--gold); }
+    .info-inner {
+      display: flex; flex-wrap: wrap; gap: 0;
+      divide-x: 1px solid rgba(0,0,0,.1);
+    }
+    .info-item {
+      flex: 1; min-width: 220px; display: flex; align-items: center; gap: 12px;
+      padding: 18px 24px; color: var(--navy); font-weight: 600; font-size: .93rem;
+      border-right: 1px solid rgba(0,0,0,.1);
+    }
+    .info-item:last-child { border-right: none; }
+    .info-item i { font-size: 1.2rem; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 36px 24px 28px;
+      text-align: center; border-top: 4px solid var(--gold);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(10,31,68,.14); }
+    .service-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--light); border: 3px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px; font-size: 1.8rem; color: var(--navy);
+    }
+    .service-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+    .service-card p  { font-size: .88rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── WHY CHOOSE US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .why-card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 32px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+      transition: transform .25s;
+    }
+    .why-card:hover { transform: translateY(-5px); }
+    .why-card i { font-size: 2rem; color: var(--gold); margin-bottom: 14px; }
+    .why-card h4 { font-size: .95rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .why-card p  { font-size: .84rem; color: var(--gray); }
+
+    /* ── GALLERY STRIP ── */
+    .gallery { padding: 0; }
+    .gallery-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+    .gallery-strip .g-item {
+      aspect-ratio: 1; overflow: hidden; background: var(--navy);
+    }
+    .gallery-strip .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.85);
+      transition: transform .35s, filter .35s;
+    }
+    .gallery-strip .g-item:hover img { transform: scale(1.08); filter: brightness(1); }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    .contact-info h3 { font-size: 1.5rem; color: var(--navy); font-weight: 800; margin-bottom: 24px; }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
+    }
+    .contact-detail .ci-icon {
+      width: 44px; height: 44px; background: var(--gold); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--navy); flex-shrink: 0;
+    }
+    .contact-detail .ci-text span { display: block; font-size: .78rem; color: var(--gray); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .contact-detail .ci-text strong { color: var(--navy); font-size: .97rem; }
+    .contact-phones { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+    .contact-phones a { color: var(--navy); font-weight: 700; font-size: 1rem; }
+    .contact-phones a:hover { color: var(--gold2); }
+
+    .contact-form-card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 36px;
+    }
+    .contact-form-card h3 { font-size: 1.3rem; color: var(--navy); font-weight: 800; margin-bottom: 22px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: .85rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1.5px solid #d1d5db;
+      border-radius: 6px; font-size: .93rem; font-family: inherit;
+      transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--gold); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,.75);
+      padding: 56px 0 0;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 48px; }
+    .footer-brand .logo-text strong { font-size: 1.05rem; }
+    .footer-brand p { margin-top: 14px; font-size: .88rem; line-height: 1.7; max-width: 260px; }
+    .footer-brand .tagline { color: var(--gold); font-style: italic; font-size: .9rem; margin-top: 8px; }
+    .footer-col h4 { color: var(--white); font-size: .95rem; font-weight: 800; margin-bottom: 16px; border-left: 3px solid var(--gold); padding-left: 10px; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: .88rem; color: rgba(255,255,255,.65); transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-contacts li { display: flex; align-items: center; gap: 10px; font-size: .88rem; margin-bottom: 10px; }
+    .footer-contacts li i { color: var(--gold); width: 16px; }
+    .footer-contacts li a { color: rgba(255,255,255,.7); }
+    .footer-contacts li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 20px 0; display: flex;
+      justify-content: space-between; align-items: center;
+      font-size: .82rem; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom span { color: rgba(255,255,255,.45); }
+    .footer-bottom a { color: var(--gold); }
+
+    /* ── SUCCESS MSG ── */
+    .success-banner {
+      display: none; background: #dcfce7; border: 1.5px solid #16a34a;
+      border-radius: 8px; padding: 18px 24px; margin-top: 20px;
+      color: #15803d; font-weight: 600; align-items: center; gap: 12px;
+    }
+    .success-banner.show { display: flex; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; }
+      .hero-image { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-strip { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .hero-text h1 { font-size: 2rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: block; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .gallery-strip { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="top">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+        <div class="logo-text">
+          <strong>KYAKERE ENGINEERING</strong>
+          <span>Building Quality, Delivering Excellence</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn-primary nav-cta">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').classList.add('open')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-mobile" onclick="document.getElementById('mobileMenu').classList.remove('open')">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="#services" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+    <a href="#why"      onclick="document.getElementById('mobileMenu').classList.remove('open')">Why Us</a>
+    <a href="#gallery"  onclick="document.getElementById('mobileMenu').classList.remove('open')">Gallery</a>
+    <a href="#contact"  onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
+    <a href="#contact" class="btn btn-primary" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get a Quote</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge">Kasese Municipality, Uganda</div>
+          <h1>Building <span>Quality,</span><br/>Delivering <span>Excellence.</span></h1>
+          <p>From general construction to electrical installation, plumbing, welding, and structural design — Kyakere Engineering Services is your trusted partner for every project.</p>
+          <div class="hero-btns">
+            <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get a Free Quote</a>
+            <a href="#services" class="btn btn-white"><i class="fa-solid fa-list"></i> Our Services</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>100%</strong><span>Client Focused</span></div>
+            <div class="hero-stat"><strong>6+</strong><span>Core Services</span></div>
+            <div class="hero-stat"><strong>Quality</strong><span>Workmanship</span></div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&auto=format&fit=crop&q=80"
+               alt="Construction site with engineers" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INFO BAR ===== -->
+  <div class="info-bar">
+    <div class="container">
+      <div class="info-inner">
+        <div class="info-item"><i class="fa-solid fa-location-dot"></i> Mukirane Street, Kasese Municipality</div>
+        <div class="info-item"><i class="fa-solid fa-envelope"></i> kyakereengineering@gmail.com</div>
+        <div class="info-item"><i class="fa-solid fa-phone"></i> 0780 868 103</div>
+        <div class="info-item"><i class="fa-solid fa-clock"></i> Mon – Sat: 8:00 AM – 6:00 PM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>We Deal In</h2>
+        <p>Professional engineering and construction services tailored to your needs — residential, commercial, and industrial.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+          <h3>General Construction</h3>
+          <p>We undertake residential, commercial, and industrial construction projects with a focus on quality, safety, and timely delivery.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+          <h3>Supply of Construction Materials</h3>
+          <p>We supply a wide range of quality construction materials to support projects of all sizes.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-faucet-drip"></i></div>
+          <h3>Plumbing</h3>
+          <p>Professional installation, maintenance, and repair of plumbing systems for homes, offices, and industrial facilities.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Electrical Installation</h3>
+          <p>Safe and efficient electrical wiring, installation, maintenance, and troubleshooting services.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-fire"></i></div>
+          <h3>Welding &amp; Metal Fabrication</h3>
+          <p>Custom metal works, gates, doors, windows, tanks, steel structures, and other fabrication services.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+          <h3>Design of Structures</h3>
+          <p>Design and planning of strong, functional, and cost-effective structures tailored to client requirements.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" class="gallery">
+    <div class="gallery-strip">
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&auto=format&fit=crop&q=70" alt="Construction" />
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&auto=format&fit=crop&q=70" alt="Building site" />
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=70" alt="Plumbing pipes" />
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&auto=format&fit=crop&q=70" alt="Electrical work" />
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1565046816282-e5e6f34e8c01?w=400&auto=format&fit=crop&q=70" alt="Welding" />
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&auto=format&fit=crop&q=70" alt="Finished structure" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY CHOOSE US ===== -->
+  <section class="section bg-light" id="why">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why Choose Us?</h2>
+        <p>We combine experience, skill, and dedication to deliver results that exceed expectations.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <i class="fa-solid fa-users-gear"></i>
+          <h4>Professional &amp; Skilled Team</h4>
+          <p>Our engineers and technicians are trained, certified, and experienced in their fields.</p>
+        </div>
+        <div class="why-card">
+          <i class="fa-solid fa-medal"></i>
+          <h4>Quality Workmanship</h4>
+          <p>We use top-grade materials and proven techniques to ensure long-lasting results.</p>
+        </div>
+        <div class="why-card">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h4>Reliable &amp; Timely Delivery</h4>
+          <p>We respect your timeline and work diligently to complete every project on schedule.</p>
+        </div>
+        <div class="why-card">
+          <i class="fa-solid fa-tags"></i>
+          <h4>Competitive Pricing</h4>
+          <p>High-quality engineering services at fair, transparent, and market-competitive prices.</p>
+        </div>
+        <div class="why-card">
+          <i class="fa-solid fa-handshake"></i>
+          <h4>Customer-Focused Approach</h4>
+          <p>Your vision drives our work. We listen, plan, and execute with your goals in mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact Us</h2>
+        <p>Reach out for a free consultation or project quote. We're ready to bring your vision to life.</p>
+      </div>
+      <div class="contact-grid">
+
+        <!-- Info -->
+        <div class="contact-info">
+          <h3>Get In Touch</h3>
+
+          <div class="contact-detail">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="ci-text">
+              <span>Location</span>
+              <strong>Mukirane Street, Kasese Municipality</strong>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="ci-text">
+              <span>Email</span>
+              <strong>kyakereengineering1@gmail.com</strong><br/>
+              <strong>faishalmzee222@gmail.com</strong>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="ci-text">
+              <span>Phone / WhatsApp</span>
+              <div class="contact-phones">
+                <a href="tel:+256780868103">0780 868 103</a>
+                <a href="tel:+256782284874">0782 284 874</a>
+                <a href="tel:+256781084632">0781 084 632</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map embed placeholder -->
+          <div style="margin-top:28px; border-radius:10px; overflow:hidden; box-shadow:var(--shadow);">
+            <iframe
+              src="https://maps.google.com/maps?q=Kasese+Municipality,+Uganda&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="Kyakere Engineering Location">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form-card">
+          <h3><i class="fa-solid fa-paper-plane" style="color:var(--gold)"></i> Send Us a Message</h3>
+          <form id="contactForm" onsubmit="submitContact(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cName">Full Name *</label>
+                <input type="text" id="cName" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="cPhone">Phone Number *</label>
+                <input type="tel" id="cPhone" placeholder="07XX XXX XXX" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cEmail">Email Address</label>
+              <input type="email" id="cEmail" placeholder="youremail@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="cService">Service Interested In *</label>
+              <select id="cService" required>
+                <option value="">Select a service...</option>
+                <option>General Construction</option>
+                <option>Supply of Construction Materials</option>
+                <option>Plumbing</option>
+                <option>Electrical Installation</option>
+                <option>Welding &amp; Metal Fabrication</option>
+                <option>Design of Structures</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cMessage">Project Details / Message *</label>
+              <textarea id="cMessage" rows="4" placeholder="Describe your project or inquiry..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+            <div class="success-banner" id="contactSuccess">
+              <i class="fa-solid fa-circle-check fa-lg"></i>
+              Thank you! We'll get back to you within 24 hours.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+            <div class="logo-text">
+              <strong>KYAKERE ENGINEERING</strong>
+              <span>Services</span>
+            </div>
+          </div>
+          <p>A trusted engineering and construction company serving Kasese Municipality and the greater Western Uganda region.</p>
+          <p class="tagline">"Your Vision. Our Expertise. Stronger Tomorrow."</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">General Construction</a></li>
+            <li><a href="#services">Construction Materials</a></li>
+            <li><a href="#services">Plumbing</a></li>
+            <li><a href="#services">Electrical Installation</a></li>
+            <li><a href="#services">Welding &amp; Fabrication</a></li>
+            <li><a href="#services">Structural Design</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why">Why Choose Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <ul class="footer-contacts">
+            <li><i class="fa-solid fa-location-dot"></i> Mukirane Street, Kasese Municipality</li>
+            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:kyakereengineering1@gmail.com">kyakereengineering1@gmail.com</a></li>
+            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:faishalmzee222@gmail.com">faishalmzee222@gmail.com</a></li>
+            <li><i class="fa-solid fa-phone"></i> <a href="tel:+256780868103">0780 868 103</a></li>
+            <li><i class="fa-solid fa-phone"></i> <a href="tel:+256782284874">0782 284 874</a></li>
+            <li><i class="fa-solid fa-phone"></i> <a href="tel:+256781084632">0781 084 632</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; 2026 Kyakere Engineering Services. All rights reserved.</span>
+        <span>Designed with <i class="fa-solid fa-heart" style="color:var(--gold)"></i> for Kasese Municipality</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Contact form submission
+    function submitContact(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      setTimeout(() => {
+        document.getElementById('contactSuccess').classList.add('show');
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
+        e.target.reset();
+      }, 1200);
+    }
+
+    // Sticky navbar shadow
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.navbar');
+      nav.style.boxShadow = window.scrollY > 10
+        ? '0 4px 24px rgba(0,0,0,.28)'
+        : '0 2px 16px rgba(0,0,0,.18)';
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
